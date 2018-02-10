@@ -6,6 +6,7 @@ env:
     - DOCKER_IMAGE=alectolytic/rpmbuilder
     - COPR_REPOSITORY=todo
     - OS_ARCH=x86_64
+    - SVN_REVISION=7900
   matrix:
     - OS_TYPE=fedora OS_DIST=fedora OS_VERSION=26
 
@@ -14,7 +15,7 @@ services:
 
 install:
   - svn export http://svn.code.sf.net/p/doublecmd/code/trunk doublecmd-0.9.0
-  - tar caf doublecmd-0.9.0-r7994.tar.xz doublecmd-0.9.0
+  - tar caf doublecmd-0.9.0-r${SVN_REVISION}.tar.xz doublecmd-0.9.0
 
 script:
   - docker run -v ${PWD}:/sources -v ${PWD}:/output:Z -e "SRPM_ONLY=1" ${DOCKER_IMAGE}:${OS_TYPE}-${OS_VERSION}
