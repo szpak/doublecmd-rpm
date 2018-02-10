@@ -36,9 +36,19 @@ install:
 script:
   - docker run -v ${PWD}:/sources -v ${PWD}:/output:Z -e "SRPM_ONLY=1" ${DOCKER_IMAGE}:${OS_TYPE}-${OS_VERSION}
   - ls -l *.rpm
+# Move it before RPM build process
   - if [[ "${PRODUCTION_BRANCH}" == "${TRAVIS_BRANCH}" && "${TRAVIS_SECURE_ENV_VARS}" == "true" ]]; then
-      copr-cli build vondruch/doublecmd doublecmd-gtk-${BASE_PACKAGE_VERSION}-*.src.rpm || travis_terminate 1;
+      export LAST_SUCCEEDED_BUILD_SVN_REVISION=`copr-cli get-package --name doublecmd-gtk --with-latest-succeeded-build vondruch/doublecmd | jq -r '.latest_succeeded_build.pkg_version' | gawk 'match($0, /\.svn([0-9]*)\.fc/, a) {print a[1]}'`;
+      if [[ "${LAST_SUCCEEDED_BUILD_SVN_REVISION}" == '' ]]; then
+        echo "Unable to find last succeeded build number";
+        travis_terminate 1;
+      fi;
+      if [[ "${SVN_REVISION}" -gt "${LAST_SUCCEEDED_BUILD_SVN_REVISION}" ]]; then
+        copr-cli build vondruch/doublecmd doublecmd-gtk-${BASE_PACKAGE_VERSION}-*.src.rpm || travis_terminate 1;
+      else
+        echo "Skipping COPR build. Current SVN revision (${SVN_REVISION}) is not greater than previously build in COPR (${LAST_SUCCEEDED_BUILD_SVN_REVISION}).";
+      fi;
     else
-      echo "Skipping COPR build (not in production branch ${PRODUCTION_BRANCH})";
-    fi
+      echo "Skipping COPR build. Not in production branch ${PRODUCTION_BRANCH}.";
+    fi;
 
