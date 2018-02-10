@@ -6,7 +6,7 @@ env:
     - DOCKER_IMAGE=alectolytic/rpmbuilder
     - COPR_REPOSITORY=todo
     - OS_ARCH=x86_64
-    - SVN_REVISION=7900
+    - SVN_REVISION=7901
   matrix:
     - OS_TYPE=fedora OS_DIST=fedora OS_VERSION=26
 
