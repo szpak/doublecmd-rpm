@@ -6,12 +6,20 @@ env:
     - DOCKER_IMAGE=alectolytic/rpmbuilder
     - COPR_REPOSITORY=todo
     - OS_ARCH=x86_64
-    - SVN_REVISION=7901
+    - BASE_SVN_REVISION=7901
   matrix:
     - OS_TYPE=fedora OS_DIST=fedora OS_VERSION=27
 
 services:
   - docker
+
+before_install:
+#  - set SVN_REVISION=`svn info http://svn.code.sf.net/p/doublecmd/code/trunk --show-item revision`
+# Manual number for now to keep version number incemented
+  - export SVN_REVISION=7902
+  - echo "Building SVN revision ${SVN_REVISION}"
+  - if ! [[ "${SVN_REVISION}" =~ ^-?[0-9]+$ ]]; then travis_terminate 1; fi
+  - sed -i s/"${BASE_SVN_REVISION}"/"${SVN_REVISION}"/g doublecmd-gtk.spec
 
 install:
   - svn export http://svn.code.sf.net/p/doublecmd/code/trunk doublecmd-0.9.0
@@ -19,8 +27,8 @@ install:
 
 script:
   - docker run -v ${PWD}:/sources -v ${PWD}:/output:Z -e "SRPM_ONLY=1" ${DOCKER_IMAGE}:${OS_TYPE}-${OS_VERSION}
+  - git diff
   - ls -l *.rpm
 
 after_success:
   - openssl aes-256-cbc -K $encrypted_749aaf58d2e1_key -iv $encrypted_749aaf58d2e1_iv -in copr.enc -out ~/.config/copr -d
-
