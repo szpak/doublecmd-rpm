@@ -12,8 +12,8 @@ Source0:	%{doublecmd}-%{version}-r%{svn_revision}.tar.xz
 License:	GPL
 Group:		Applications/File
 BuildRequires:	fpc >= 2.6.0 fpc-src glib2-devel gtk2-devel lazarus >= 1.0.0
-BuildRequires:  ncurses-devel dbus-devel bzip2-devel xorg-x11-proto-devel xorg-x11-xtrans-devel
-Provides:  doublecmd
+BuildRequires:	ncurses-devel dbus-devel bzip2-devel xorg-x11-proto-devel xorg-x11-xtrans-devel
+Provides:	doublecmd = %{version}-%{release}
 
 %description
 Double Commander is a cross platform open source file manager with two panels side by side.
@@ -54,6 +54,7 @@ install/linux/install.sh --install-prefix=%{buildroot}
 
 * Sat Feb 10 2018 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> - 0.9.0-0.svn7900
 - Base revision for automatically triggered CI builds in COPR - https://github.com/szpak/doublecmd-rpm
+- Fix some rpmlint issues
 
 * Tue Mar 07 2017 Vít Ondruch <vondruch@redhat.com> - 0.8.0-0.svn7324
 - Revision 7324.
