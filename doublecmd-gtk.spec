@@ -49,7 +49,7 @@ install/linux/install.sh --install-prefix=%{buildroot}
 %doc %{_mandir}/man1/*
 
 %changelog
-* Sat Feb 10 2018 Marcin Zajaczkowski - CI Bot <mszpak ATT wp DOTT pl> - 0.9.0-0.svn7901
+* Sun Feb 11 2018 Marcin Zajaczkowski - CI Bot <mszpak ATT wp DOTT pl> - 0.9.0-0.svn7901
 - Version built automatically - intermediate changelog entries since r7900 may be missing
 
 * Sat Feb 10 2018 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> - 0.9.0-0.svn7900
