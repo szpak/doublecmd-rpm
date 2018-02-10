@@ -21,3 +21,6 @@ script:
   - docker run -v ${PWD}:/sources -v ${PWD}:/output:Z -e "SRPM_ONLY=1" ${DOCKER_IMAGE}:${OS_TYPE}-${OS_VERSION}
   - ls -l *.rpm
 
+after_success:
+  - openssl aes-256-cbc -K $encrypted_749aaf58d2e1_key -iv $encrypted_749aaf58d2e1_iv -in copr.enc -out ~/.config/copr -d
+
