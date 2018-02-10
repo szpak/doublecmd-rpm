@@ -8,6 +8,7 @@ env:
     - OS_ARCH=x86_64
     - BASE_SVN_REVISION=7901
     - BASE_PACKAGE_VERSION=0.9.0
+    - PRODUCTION_BRANCH=master
   matrix:
     - OS_TYPE=fedora OS_DIST=fedora OS_VERSION=27
 
@@ -24,7 +25,9 @@ before_install:
   - git diff
 # COPR credentials and cli
   - pip install copr-cli simplejson
-  - openssl aes-256-cbc -K $encrypted_749aaf58d2e1_key -iv $encrypted_749aaf58d2e1_iv -in copr.enc -out ~/.config/copr -d
+  - if [[ "${TRAVIS_SECURE_ENV_VARS}" == "true" ]]; then
+      openssl aes-256-cbc -K $encrypted_749aaf58d2e1_key -iv $encrypted_749aaf58d2e1_iv -in copr.enc -out ~/.config/copr -d || travis_terminate 1;
+    fi
 
 install:
   - svn export http://svn.code.sf.net/p/doublecmd/code/trunk doublecmd-${BASE_PACKAGE_VERSION}
@@ -33,5 +36,9 @@ install:
 script:
   - docker run -v ${PWD}:/sources -v ${PWD}:/output:Z -e "SRPM_ONLY=1" ${DOCKER_IMAGE}:${OS_TYPE}-${OS_VERSION}
   - ls -l *.rpm
-  - copr-cli build vondruch/doublecmd doublecmd-gtk-${BASE_PACKAGE_VERSION}-*.src.rpm
+  - if [[ "${PRODUCTION_BRANCH}" == "${TRAVIS_BRANCH}" && "${TRAVIS_SECURE_ENV_VARS}" == "true" ]]; then
+      copr-cli build vondruch/doublecmd doublecmd-gtk-${BASE_PACKAGE_VERSION}-*.src.rpm || travis_terminate 1;
+    else
+      echo "Skipping COPR build (not in production branch ${PRODUCTION_BRANCH})";
+    fi
 
