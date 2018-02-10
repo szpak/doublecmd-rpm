@@ -18,7 +18,10 @@ services:
   - docker
 
 before_install:
-#  - set SVN_REVISION=`svn info http://svn.code.sf.net/p/doublecmd/code/trunk --show-item revision`
+#  - export SVN_REVISION=`svn info http://svn.code.sf.net/p/doublecmd/code/trunk --show-item revision`
+# Workaround as --shot-item is not available in SVN 1.8.8
+  - export SVN_REVISION=`svn info http://svn.code.sf.net/p/doublecmd/code/trunk | grep "Revision" | cut -d" " -f2`
+  - echo "The latest revision in SVN - ${SVN_REVISION}"
 # Manual number for now to keep version number incemented
   - export SVN_REVISION=7903
   - echo "Building SVN revision ${SVN_REVISION}"
