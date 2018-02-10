@@ -10,7 +10,7 @@ env:
     - BASE_SVN_REVISION=7901
     - BASE_PACKAGE_VERSION=0.9.0
     - BASE_PACKAGE_DATE="Sun Feb 11 2018"
-    - PRODUCTION_BRANCH=svn
+    - PRODUCTION_BRANCH=master
   matrix:
     - OS_TYPE=fedora OS_DIST=fedora OS_VERSION=27
 
@@ -22,8 +22,8 @@ before_install:
 # Workaround as --shot-item is not available in SVN 1.8.8
   - export SVN_REVISION=`svn info http://svn.code.sf.net/p/doublecmd/code/trunk | grep "Revision" | cut -d" " -f2`
   - echo "The latest revision in SVN - ${SVN_REVISION}"
-# Manual number for now to keep version number incemented
-  - export SVN_REVISION=7903
+# Manual number for now to keep version number incemented during development
+  - export SVN_REVISION=7910
   - echo "Building SVN revision ${SVN_REVISION}"
   - if ! [[ "${SVN_REVISION}" =~ ^-?[0-9]+$ ]]; then travis_terminate 1; fi
   - sed -i s/"${BASE_SVN_REVISION}"/"${SVN_REVISION}"/g doublecmd-gtk.spec
@@ -42,7 +42,7 @@ install:
 script:
   - docker run -v ${PWD}:/sources -v ${PWD}:/output:Z -e "SRPM_ONLY=1" ${DOCKER_IMAGE}:${OS_TYPE}-${OS_VERSION}
   - ls -l *.rpm
-# Move it before RPM build process
+# Could be moved before RPM build process, however, having it after provided sanity tests even if no new commits are made
   - if [[ "${PRODUCTION_BRANCH}" == "${TRAVIS_BRANCH}" && "${TRAVIS_SECURE_ENV_VARS}" == "true" ]]; then
       export LAST_SUCCEEDED_BUILD_SVN_REVISION=`copr-cli get-package --name doublecmd-gtk --with-latest-succeeded-build vondruch/doublecmd | jq -r '.latest_succeeded_build.pkg_version' | gawk 'match($0, /\.svn([0-9]*)\.fc/, a) {print a[1]}'`;
       if [[ "${LAST_SUCCEEDED_BUILD_SVN_REVISION}" == '' ]]; then
