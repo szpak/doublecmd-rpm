@@ -1,0 +1,20 @@
+sudo: required
+language: python
+
+env:
+  global:
+    - DOCKER_IMAGE=alectolytic/rpmbuilder
+    - COPR_REPOSITORY=todo
+    - OS_ARCH=x86_64
+  matrix:
+    - OS_TYPE=fedora OS_DIST=fedora OS_VERSION=26
+
+services:
+  - docker
+
+install: true
+
+script:
+  - docker run -v ${PWD}:/sources -v ${PWD}:/output:Z -e "SRPM_ONLY=1" ${DOCKER_IMAGE}:${OS_TYPE}-${OS_VERSION}
+  - ls -l *.rpm
+
