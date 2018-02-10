@@ -1,13 +1,13 @@
 %global doublecmd doublecmd
-%global svn_revision 7994
+%global svn_revision 7900
 
 Name:		doublecmd-gtk
 Summary:	Twin-panel (commander-style) file manager (GTK2)
 Version:	0.9.0
 Release:	0.svn%{svn_revision}%{?dist}
 URL:		http://doublecmd.sourceforge.net
-# svn export -r 7324 http://svn.code.sf.net/p/doublecmd/code/trunk doublecmd-0.8.0
-# tar cafv doublecmd-0.8.0-r7324.tar.xz doublecmd-0.8.0
+# svn export -r 7900 http://svn.code.sf.net/p/doublecmd/code/trunk doublecmd-0.9.0
+# tar cafv doublecmd-0.9.0-r7900.tar.xz doublecmd-0.9.0
 Source0:	%{doublecmd}-%{version}-r%{svn_revision}.tar.xz
 License:	GPL
 Group:		Applications/File
@@ -49,8 +49,8 @@ install/linux/install.sh --install-prefix=%{buildroot}
 %doc %{_mandir}/man1/*
 
 %changelog
-* Sat Feb 10 2018 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> - 0.9.0-0.svn7994
-- Revision 7994.
+* Sat Feb 10 2018 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> - 0.9.0-0.svn7900
+- Revision 7900.
 
 * Tue Mar 07 2017 Vít Ondruch <vondruch@redhat.com> - 0.8.0-0.svn7324
 - Revision 7324.
