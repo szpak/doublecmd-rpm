@@ -49,11 +49,11 @@ install/linux/install.sh --install-prefix=%{buildroot}
 %doc %{_mandir}/man1/*
 
 %changelog
-* Sat Feb 10 2018 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> - 0.9.0-0.svn7901
-- Base revision for automatically triggered CI builds in COPR - https://github.com/szpak/doublecmd-rpm
+* Sat Feb 10 2018 Marcin Zajaczkowski - CI Bot <mszpak ATT wp DOTT pl> - 0.9.0-0.svn7901
+- Version built automatically - intermediate changelog entries since r7900 may be missing
 
 * Sat Feb 10 2018 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> - 0.9.0-0.svn7900
-- Revision 7900.
+- Base revision for automatically triggered CI builds in COPR - https://github.com/szpak/doublecmd-rpm
 
 * Tue Mar 07 2017 Vít Ondruch <vondruch@redhat.com> - 0.8.0-0.svn7324
 - Revision 7324.
