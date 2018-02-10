@@ -14,6 +14,7 @@ services:
 
 install:
   - svn export http://svn.code.sf.net/p/doublecmd/code/trunk doublecmd-0.9.0
+  - tar caf doublecmd-0.9.0-r7994.tar.xz doublecmd-0.9.0
 
 script:
   - docker run -v ${PWD}:/sources -v ${PWD}:/output:Z -e "SRPM_ONLY=1" ${DOCKER_IMAGE}:${OS_TYPE}-${OS_VERSION}
