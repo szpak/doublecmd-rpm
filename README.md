@@ -28,3 +28,5 @@ Bugs, questions and feature requests related to **Double Commander itself** shou
 The nightly Fedora builds are provided to you by [Marcin Zajączkowski](https://github.com/szpak/) and [Vít Ondruch](https://copr.fedorainfracloud.org/coprs/vondruch/).
 
 The Travis build script is licensed under the terms of [the Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt).
+
+[Double Commander](http://doublecmd.sourceforge.net/) itself is licensed under the terms of the GNU General Public License, version 2 or (at your option) any later version.
