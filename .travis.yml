@@ -18,9 +18,9 @@ services:
   - docker
 
 before_install:
-#  - export SVN_REVISION=`svn info http://svn.code.sf.net/p/doublecmd/code/trunk --show-item revision`
+#  - export SVN_REVISION=`svn info https://svn.code.sf.net/p/doublecmd/code/trunk --show-item revision`
 # Workaround as --shot-item is not available in SVN 1.8.8
-  - export SVN_REVISION=`svn info http://svn.code.sf.net/p/doublecmd/code/trunk | grep "Revision" | cut -d" " -f2`
+  - export SVN_REVISION=`svn info https://svn.code.sf.net/p/doublecmd/code/trunk | grep "Revision" | cut -d" " -f2`
   - echo "Building SVN revision ${SVN_REVISION}"
   - if ! [[ "${SVN_REVISION}" =~ ^-?[0-9]+$ ]]; then travis_terminate 1; fi
   - sed -i s/"${BASE_SVN_REVISION}"/"${SVN_REVISION}"/g doublecmd-gtk.spec
@@ -33,7 +33,7 @@ before_install:
     fi
 
 install:
-  - svn export http://svn.code.sf.net/p/doublecmd/code/trunk doublecmd-${BASE_PACKAGE_VERSION}
+  - svn export https://svn.code.sf.net/p/doublecmd/code/trunk doublecmd-${BASE_PACKAGE_VERSION}
   - tar caf doublecmd-${BASE_PACKAGE_VERSION}-r${SVN_REVISION}.tar.xz doublecmd-${BASE_PACKAGE_VERSION}
 
 script:
