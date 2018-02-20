@@ -49,7 +49,7 @@ script:
       fi;
       if [[ "${SVN_REVISION}" -gt "${LAST_SUCCEEDED_BUILD_SVN_REVISION}" ]]; then
         echo "Building code from SVN revision ${SVN_REVISION} in COPR. It may take several minutes.";
-        copr-cli build vondruch/doublecmd doublecmd-gtk-${BASE_PACKAGE_VERSION}-*.src.rpm || travis_terminate 1;
+        stdbuf -o 0 copr-cli build vondruch/doublecmd doublecmd-gtk-${BASE_PACKAGE_VERSION}-*.src.rpm || travis_terminate 1;
       else
         echo "Skipping COPR build. Current SVN revision (${SVN_REVISION}) is not greater than previously build in COPR (${LAST_SUCCEEDED_BUILD_SVN_REVISION}).";
       fi;
