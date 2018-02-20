@@ -9,6 +9,7 @@ URL:		http://doublecmd.sourceforge.net
 # svn export -r 7901 http://svn.code.sf.net/p/doublecmd/code/trunk doublecmd-0.9.0
 # tar cafv doublecmd-0.9.0-r7901.tar.xz doublecmd-0.9.0
 Source0:	%{doublecmd}-%{version}-r%{svn_revision}.tar.xz
+Patch0:		doublecmd-svn-revision-in-rpm.patch
 License:	GPL
 Group:		Applications/File
 BuildRequires:	fpc >= 2.6.0 fpc-src glib2-devel gtk2-devel lazarus >= 1.0.0
@@ -21,6 +22,7 @@ It is inspired by Total Commander and features some new ideas.
 
 %prep
 %setup -q -n %{doublecmd}-%{version}
+%patch0 -p1
 
 %build
 # Don't use external debug symbols, since the rpmbuild's find-debuginfo can't
@@ -33,6 +35,9 @@ sed -i '/strip/ s/^/#/' build.sh
 # Since we want to have internal debug info, let's generate .zdli from it.
 # http://doublecmd.sourceforge.net/mantisbt/view.php?id=963
 sed -i '/extractdwrflnfo/ s/.dbg//' build.sh
+
+# Apply SVN revision number if available
+install/linux/update-revision.sh . .
 
 ./build.sh beta gtk2
 

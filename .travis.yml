@@ -25,6 +25,8 @@ before_install:
   - export SVN_REVISION=`svn info ${SVN_REPO_URL} | grep "Revision" | cut -d" " -f2`
   - echo "Building SVN revision ${SVN_REVISION}"
   - if ! [[ "${SVN_REVISION}" =~ ^-?[0-9]+$ ]]; then travis_terminate 1; fi
+  # Pass SVN revision for build to display in DoubleCmd
+  - export DC_REVISION="${SVN_REVISION}"
   - sed -i s/"${BASE_SVN_REVISION}"/"${SVN_REVISION}"/g doublecmd-gtk.spec
   - sed -i s/"* ${BASE_PACKAGE_DATE}"/"* $(date "+%a %b %d %Y")"/g doublecmd-gtk.spec
   - git diff

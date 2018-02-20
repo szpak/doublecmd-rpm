@@ -1,0 +1,25 @@
+diff --git a/install/linux/update-revision.sh b/install/linux/update-revision.sh
+index f5905e3f..01278b00 100755
+--- a/install/linux/update-revision.sh
++++ b/install/linux/update-revision.sh
+@@ -1,11 +1,15 @@
+ #!/bin/sh
+ 
+-# DC revision number
+-export DC_REVISION=$(svnversion $1 | sed -e 's/\([0-9]*\).*/\1/')
++# DC revision number - leverage if already set or get from local SVN copy
++if [[ "${DC_REVISION}" == '' ]]; then
++  export DC_REVISION=$(svnversion $1 | sed -e 's/\([0-9]*\).*/\1/')
++fi
+ 
+-# Update dcrevision.inc
+-echo "// Created by Svn2RevisionInc"      >  $2/units/dcrevision.inc
+-echo "const dcRevision = '$DC_REVISION';" >> $2/units/dcrevision.inc
++if [[ "${DC_REVISION}" != '' ]]; then
++  # Update dcrevision.inc if available
++  echo "// Created by Svn2RevisionInc"      >  $2/units/dcrevision.inc
++  echo "const dcRevision = '$DC_REVISION';" >> $2/units/dcrevision.inc
++fi
+ 
+ # Return revision
+ echo $DC_REVISION
