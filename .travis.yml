@@ -11,6 +11,7 @@ env:
     - BASE_SVN_REVISION=7901
     - BASE_PACKAGE_VERSION=0.9.0
     - BASE_PACKAGE_DATE="Sun Feb 11 2018"
+    - COPR_PROJECT=vondruch/doublecmd
     - PRODUCTION_BRANCH=master
   matrix:
     - OS_TYPE=fedora OS_DIST=fedora OS_VERSION=27
@@ -42,14 +43,14 @@ script:
   - ls -l *.rpm
 # Could be moved before RPM build process, however, having it after provided sanity tests even if no new commits are made
   - if [[ "${PRODUCTION_BRANCH}" == "${TRAVIS_BRANCH}" && "${TRAVIS_SECURE_ENV_VARS}" == "true" ]]; then
-      export LAST_SUCCEEDED_BUILD_SVN_REVISION=`copr-cli get-package --name doublecmd-gtk --with-latest-succeeded-build vondruch/doublecmd | jq -r '.latest_succeeded_build.pkg_version' | gawk 'match($0, /\.svn([0-9]*)\.fc/, a) {print a[1]}'`;
+      export LAST_SUCCEEDED_BUILD_SVN_REVISION=`copr-cli get-package --name doublecmd-gtk --with-latest-succeeded-build "${COPR_PROJECT}" | jq -r '.latest_succeeded_build.pkg_version' | gawk 'match($0, /\.svn([0-9]*)\.fc/, a) {print a[1]}'`;
       if [[ "${LAST_SUCCEEDED_BUILD_SVN_REVISION}" == '' ]]; then
         echo "Unable to find last succeeded build number";
         travis_terminate 1;
       fi;
       if [[ "${SVN_REVISION}" -gt "${LAST_SUCCEEDED_BUILD_SVN_REVISION}" ]]; then
         echo "Building code from SVN revision ${SVN_REVISION} in COPR. It may take several minutes.";
-        stdbuf -o 0 copr-cli build vondruch/doublecmd doublecmd-gtk-${BASE_PACKAGE_VERSION}-*.src.rpm || travis_terminate 1;
+        stdbuf -o 0 copr-cli build "${COPR_PROJECT} doublecmd-gtk-${BASE_PACKAGE_VERSION}-*.src.rpm || travis_terminate 1;
       else
         echo "Skipping COPR build. Current SVN revision (${SVN_REVISION}) is not greater than previously build in COPR (${LAST_SUCCEEDED_BUILD_SVN_REVISION}).";
       fi;
