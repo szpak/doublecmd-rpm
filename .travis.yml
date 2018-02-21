@@ -12,7 +12,7 @@ env:
     - BASE_PACKAGE_VERSION=0.9.0
     - BASE_PACKAGE_DATE="Thu Feb 22 2018"
     - COPR_PROJECT=vondruch/doublecmd
-    - PRODUCTION_BRANCH=feature/4-passSvnRevision
+    - PRODUCTION_BRANCH=master
   matrix:
     - OS_TYPE=fedora OS_DIST=fedora OS_VERSION=27
 
@@ -23,8 +23,6 @@ before_install:
 #  - export SVN_REVISION=`svn info ${SVN_REPO_URL} --show-item revision`
 # Workaround as --shot-item is not available in SVN 1.8.8
   - export SVN_REVISION=`svn info ${SVN_REPO_URL} | grep "Revision" | cut -d" " -f2`
-  - echo "The latest revision in SVN - ${SVN_REVISION}"
-  - export SVN_REVISION=7997
   - echo "Building SVN revision ${SVN_REVISION}"
   - if ! [[ "${SVN_REVISION}" =~ ^-?[0-9]+$ ]]; then travis_terminate 1; fi
   # Pass SVN revision for build to display in DoubleCmd
