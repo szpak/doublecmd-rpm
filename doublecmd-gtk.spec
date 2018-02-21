@@ -1,5 +1,5 @@
 %global doublecmd doublecmd
-%global svn_revision 7901
+%global svn_revision 7911
 
 Name:		doublecmd-gtk
 Summary:	Twin-panel (commander-style) file manager (GTK2)
@@ -54,8 +54,12 @@ install/linux/install.sh --install-prefix=%{buildroot}
 %doc %{_mandir}/man1/*
 
 %changelog
-* Sun Feb 11 2018 Marcin Zajaczkowski - CI Bot <mszpak ATT wp DOTT pl> - 0.9.0-0.svn7901
-- Version built automatically - intermediate changelog entries since r7900 may be missing
+* Thu Feb 22 2018 Marcin Zajaczkowski - CI Bot <mszpak ATT wp DOTT pl> - 0.9.0-0.svn7911
+- Version built automatically - intermediate changelog entries since r7910 may be missing
+
+* Wed Feb 21 2018 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> - 0.9.0-0.svn7910
+- New base revision for automatically triggered CI builds in COPR - https://github.com/szpak/doublecmd-rpm
+- Pass SVN revision to DoubleCmd build - https://github.com/szpak/doublecmd-rpm/issues/4
 
 * Sat Feb 10 2018 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> - 0.9.0-0.svn7900
 - Base revision for automatically triggered CI builds in COPR - https://github.com/szpak/doublecmd-rpm
