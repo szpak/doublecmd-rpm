@@ -36,8 +36,8 @@ sed -i '/strip/ s/^/#/' build.sh
 # http://doublecmd.sourceforge.net/mantisbt/view.php?id=963
 sed -i '/extractdwrflnfo/ s/.dbg//' build.sh
 
-# Apply SVN revision number if available
-install/linux/update-revision.sh . .
+# Apply SVN revision number resolved at SPEC file preparation time
+DC_REVISION=%{svn_revision} install/linux/update-revision.sh . .
 
 ./build.sh beta gtk2
 
