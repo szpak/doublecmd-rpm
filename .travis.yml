@@ -3,7 +3,6 @@ language: python
 
 env:
   global:
-    - TERM=dumb
     - DOCKER_IMAGE=alectolytic/rpmbuilder
     - COPR_REPOSITORY=todo
     - OS_ARCH=x86_64
@@ -20,6 +19,8 @@ services:
   - docker
 
 before_install:
+  - echo "TERM $TERM"
+  - wget https://download.java.net/java/GA/jdk10/10/binaries/openjdk-10_linux-x64_bin.tar.gz
 #  - export SVN_REVISION=`svn info ${SVN_REPO_URL} --show-item revision`
 # Workaround as --shot-item is not available in SVN 1.8.8
   - export SVN_REVISION=`svn info ${SVN_REPO_URL} | grep "Revision" | cut -d" " -f2`
