@@ -8,7 +8,7 @@ env:
     - COPR_REPOSITORY=todo
     - OS_ARCH=x86_64
     - SVN_REPO_URL="https://svn.code.sf.net/p/doublecmd/code/trunk"
-    - BASE_SVN_REVISION=7911
+    - BASE_SVN_REVISION=8100
     - BASE_PACKAGE_VERSION=0.9.0
     - BASE_PACKAGE_DATE="Thu Feb 22 2018"
     - COPR_PROJECT=vondruch/doublecmd
