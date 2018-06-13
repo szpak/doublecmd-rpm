@@ -1,5 +1,5 @@
 %global doublecmd doublecmd
-%global svn_revision 7911
+%global svn_revision 8100
 
 Name:		doublecmd-gtk
 Summary:	Twin-panel (commander-style) file manager (GTK2)
@@ -51,11 +51,16 @@ install/linux/install.sh --install-prefix=%{buildroot}
 %{_datadir}/applications/%{doublecmd}.desktop
 %{_datadir}/icons
 %{_datadir}/pixmaps/%{doublecmd}.png
+%{_datadir}/polkit-1/actions/org.%{doublecmd}.root.policy
 %doc %{_mandir}/man1/*
 
 %changelog
-* Thu Feb 22 2018 Marcin Zajaczkowski - CI Bot <mszpak ATT wp DOTT pl> - 0.9.0-0.svn7911
-- Version built automatically - intermediate changelog entries since r7910 may be missing
+* Thu Jun 14 2018 Marcin Zajaczkowski - CI Bot <mszpak ATT wp DOTT pl> - 0.9.0-0.svn8101
+- Version built automatically - intermediate changelog entries since r8100 may be missing
+
+* Thu Jun 14 2018 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> - 0.9.0-0.svn8100
+- New base revision for automatically triggered CI builds in COPR - https://github.com/szpak/doublecmd-rpm
+- Package also polkit policy file
 
 * Wed Feb 21 2018 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> - 0.9.0-0.svn7910
 - New base revision for automatically triggered CI builds in COPR - https://github.com/szpak/doublecmd-rpm
