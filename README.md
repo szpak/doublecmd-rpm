@@ -2,9 +2,9 @@
 
 This project provides nightly (weekly) builds of [Double Commander](http://doublecmd.sourceforge.net/) for Fedora using [Travis](https://travis-ci.org/) and [COPR](http://copr.fedorainfracloud.org/).
 
-[Double Commander](http://doublecmd.sourceforge.net/) is open source file manager with two panels side by side. It is inspired by Total Commander and features some new ideas.
+[Double Commander](http://doublecmd.sourceforge.net/) is an open source file manager with two panels side by side. It is inspired by Total Commander and features some new ideas.
 
-**Beta warning**. The nightly builds are produced directly from the source code repository and may be unstable. If you prefer stable releases the author provides a dedicated stable RPM [repository](https://software.opensuse.org/download.html?project=home%3AAlexx2000&package=doublecmd-gtk).
+**Beta warning**. The nightly builds are produced directly from the source code repository and may be unstable. If you prefer stable releases the Double Commander's author provides a dedicated stable RPM [repository](https://software.opensuse.org/download.html?project=home%3AAlexx2000&package=doublecmd-gtk).
 
 ## Quick start
 
