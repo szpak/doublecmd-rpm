@@ -37,12 +37,12 @@ before_install:
     fi
 
 install:
-  - svn export ${SVN_REPO_URL} doublecmd-${BASE_PACKAGE_VERSION}
-  - tar caf doublecmd-${BASE_PACKAGE_VERSION}-r${SVN_REVISION}.tar.xz doublecmd-${BASE_PACKAGE_VERSION}
+  - svn export ${SVN_REPO_URL} doublecmd-${BASE_PACKAGE_VERSION} || travis_terminate 1
+  - tar caf doublecmd-${BASE_PACKAGE_VERSION}-r${SVN_REVISION}.tar.xz doublecmd-${BASE_PACKAGE_VERSION} || travis_terminate 1
 
 script:
-  - docker run -v ${PWD}:/sources -v ${PWD}:/output:Z -e "SRPM_ONLY=1" ${DOCKER_IMAGE}:${OS_TYPE}-${OS_VERSION}
-  - ls -l *.rpm
+  - docker run -v ${PWD}:/sources -v ${PWD}:/output:Z -e "SRPM_ONLY=1" ${DOCKER_IMAGE}:${OS_TYPE}-${OS_VERSION} || travis_terminate 1
+  - ls -l *.rpm || travis_terminate 1
 # Could be moved before RPM build process, however, having it after provided sanity tests even if no new commits are made
   - if [[ "${PRODUCTION_BRANCH}" == "${TRAVIS_BRANCH}" && "${TRAVIS_SECURE_ENV_VARS}" == "true" ]]; then
       export LAST_SUCCEEDED_BUILD_SVN_REVISION=`copr-cli get-package --name doublecmd-gtk --with-latest-succeeded-build "${COPR_PROJECT}" | jq -r '.latest_succeeded_build.pkg_version' | gawk 'match($0, /\.svn([0-9]*)\.fc/, a) {print a[1]}'`;
