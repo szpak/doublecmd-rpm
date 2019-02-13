@@ -14,7 +14,7 @@ env:
     - COPR_PROJECT=vondruch/doublecmd
     - PRODUCTION_BRANCH=master
   matrix:
-    - OS_TYPE=fedora OS_DIST=fedora OS_VERSION=28
+    - OS_TYPE=fedora OS_DIST=fedora OS_VERSION=29
 
 services:
   - docker
