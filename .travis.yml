@@ -45,7 +45,7 @@ script:
   - ls -l *.rpm || travis_terminate 1
 # Could be moved before RPM build process, however, having it after provided sanity tests even if no new commits are made
   - if [[ "${PRODUCTION_BRANCH}" == "${TRAVIS_BRANCH}" && "${TRAVIS_SECURE_ENV_VARS}" == "true" ]]; then
-      export LAST_SUCCEEDED_BUILD_SVN_REVISION=`copr-cli get-package --name doublecmd-gtk --with-latest-succeeded-build "${COPR_PROJECT}" | jq -r '.latest_succeeded_build.pkg_version' | gawk 'match($0, /\.svn([0-9]*)\.fc/, a) {print a[1]}'`;
+      export LAST_SUCCEEDED_BUILD_SVN_REVISION=`copr-cli get-package --name doublecmd-gtk --with-latest-succeeded-build "${COPR_PROJECT}" | jq -r '.latest_succeeded_build.source_package.version' | gawk 'match($0, /\.svn([0-9]*)\.fc/, a) {print a[1]}'`;
       if [[ "${LAST_SUCCEEDED_BUILD_SVN_REVISION}" == '' ]]; then
         echo "Unable to find last succeeded build number";
         travis_terminate 1;
