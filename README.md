@@ -1,4 +1,6 @@
-# Nightly builds of Double Commander for Fedora [![Build Status Travis](https://travis-ci.org/szpak/doublecmd-rpm.svg?branch=master)](https://travis-ci.org/szpak/doublecmd-rpm)
+# Nightly builds of Double Commander for Fedora
+[![Build Status Travis](https://travis-ci.org/szpak/doublecmd-rpm.svg?branch=master)](https://travis-ci.org/szpak/doublecmd-rpm)
+[![Copr build status](https://copr.fedorainfracloud.org/coprs/vondruch/doublecmd/package/doublecmd-gtk/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/vondruch/doublecmd/package/doublecmd-gtk/)
 
 This project provides nightly (weekly) builds of [Double Commander](http://doublecmd.sourceforge.net/) for Fedora using [Travis](https://travis-ci.org/) and [COPR](http://copr.fedorainfracloud.org/).
 
