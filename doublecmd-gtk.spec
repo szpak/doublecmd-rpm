@@ -1,5 +1,5 @@
 %global doublecmd doublecmd
-%global svn_revision 8900
+%global svn_revision 8901
 
 Name:		doublecmd-gtk
 Summary:	Twin-panel (commander-style) file manager (GTK2)
