@@ -56,7 +56,7 @@ install/linux/install.sh --install-prefix=%{buildroot}
 
 %changelog
 * Thu Aug 15 2019 Marcin Zajaczkowski - CI Bot <mszpak ATT wp DOTT pl> - 1.0.0-0.svn8901
-- Version built automatically - intermediate changelog entries since r8200 may be missing
+- Version built automatically - intermediate changelog entries since r8900 may be missing
 
 * Wed Aug 14 2019 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> - 1.0.0-0.svn8900
 - New base revision for automatically triggered CI builds in COPR - https://github.com/szpak/doublecmd-rpm
