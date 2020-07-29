@@ -33,7 +33,7 @@ before_install:
 # COPR credentials and cli
   - pip install copr-cli simplejson
   - if [[ "${TRAVIS_SECURE_ENV_VARS}" == "true" ]]; then
-      openssl aes-256-cbc -K $encrypted_444d97e8cc45_key -iv $encrypted_444d97e8cc45_iv -in copr.enc -out ~/.config/copr -d || travis_terminate 1;
+      openssl aes-256-cbc -K $encrypted_a0f4470662d2_key -iv $encrypted_a0f4470662d2_iv -in copr.enc -out ~/.config/copr -d || travis_terminate 1;
     fi
 
 install:
